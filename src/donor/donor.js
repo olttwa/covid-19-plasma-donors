@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import GeoLocation from '../hooks/geoLocation'
+import axios from 'axios'
 
 const theme = createMuiTheme({
   palette: {
@@ -34,13 +35,26 @@ const Donor = () => {
   const location = GeoLocation();
 
   const callBackend = () => {
+    const body = {
+      "name": name,
+      "age": age,
+      "gender": gender,
+      "phone": phone,
+      "email": email,
+      "bloodGroup": bloodGroup,
+      "location": {
+        "lat": location.coordinates.lat,
+        "lon": location.coordinates.lon
+      }
+    }
+    axios.post("http://chirag:8080/donors", JSON.stringify(body))
     console.log("Name: " + name)
     console.log("Age: " + age)
     console.log("Gender: " + gender)
     console.log("Phone: " + phone)
     console.log("Email: " + email)
     console.log("BloodGroup: " + bloodGroup)
-    console.log("Location: " + location.coordinates.lat + ", " + location.coordinates.lng)
+    console.log("Location: " + location.coordinates.lat + ", " + location.coordinates.lon)
   }
 
   return (
@@ -120,7 +134,7 @@ const Donor = () => {
             color="primary"
             variant="contained"
             onClick={callBackend}
-          >Submit</Button>
+          >Submit Donor Details</Button>
         </Dialog>
       </>
     </MuiThemeProvider >

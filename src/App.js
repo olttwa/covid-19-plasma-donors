@@ -1,6 +1,7 @@
 import Button from '@material-ui/core/Button';
 import './App.css';
 import Donor from './donor/donor';
+import Recipient from './recipient/recipient';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/donor" component={Donor} />
+          <Route path="/recipient" component={Recipient} />
         </Switch>
       </div>
     </Router>
@@ -27,12 +29,12 @@ function Home() {
       <br></br>
 
       <Button variant="contained" color="primary" href="/donor">
-        🩸 Become a Covid-19 Plasma Donor 🩸
+        🩸 Become a Plasma Donor 🩸
         </Button>
       <br></br>
 
-      <Button variant="contained" color="secondary">
-        🔍   Find Covid-19 Plasma Donors   🔍
+      <Button variant="contained" color="secondary" href="/recipient">
+        🔍   Find Plasma Donors   🔍
         </Button>
     </header>
   );
