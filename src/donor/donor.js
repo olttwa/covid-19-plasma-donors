@@ -26,6 +26,7 @@ const theme = createMuiTheme({
 });
 
 const Donor = () => {
+  const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
@@ -47,98 +48,101 @@ const Donor = () => {
         "lon": location.coordinates.lon
       }
     }
-    axios.post("http://chirag:8080/donors", JSON.stringify(body))
-    console.log("Name: " + name)
-    console.log("Age: " + age)
-    console.log("Gender: " + gender)
-    console.log("Phone: " + phone)
-    console.log("Email: " + email)
-    console.log("BloodGroup: " + bloodGroup)
-    console.log("Location: " + location.coordinates.lat + ", " + location.coordinates.lon)
+    axios.post("http://b40253f91bbe.ngrok.io/donors", JSON.stringify(body))
+    setStep(2)
   }
 
-  return (
-    <MuiThemeProvider theme={theme} >
-      <>
-        <Dialog
-          open
-          fullWidth
-          maxWidth='sm'
-        >
-          <AppBar title="Enter Donor Details" />
-          <TextField
-            placeholder="Enter Your Name"
-            label="Name"
-            onChange={event => setName(event.target.value)}
-            defaultValue={name}
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            placeholder="Enter Your Age"
-            label="Age"
-            onChange={event => setAge(event.target.value)}
-            defaultValue={age}
-            margin="normal"
-            fullWidth
-            inputProps={{ inputMode: 'numeric' }}
-          />
-          <br />
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup row value={gender} onChange={event => setGender(event.target.value)}>
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-          <TextField
-            placeholder="Enter Your Phone"
-            label="Phone"
-            onChange={event => setPhone(event.target.value)}
-            defaultValue={phone}
-            margin="normal"
-            fullWidth
-            inputProps={{ inputMode: 'numeric' }}
-          />
-          <TextField
-            placeholder="Enter Your Email"
-            label="Email"
-            onChange={event => setEmail(event.target.value)}
-            defaultValue={email}
-            margin="normal"
-            fullWidth
-          />
-          <br />
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Blood Group</FormLabel>
-            <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
-              <FormControlLabel value="A+" control={<Radio />} label="A➕" />
-              <FormControlLabel value="A-" control={<Radio />} label="A➖" />
-            </RadioGroup>
-            <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
-              <FormControlLabel value="B+" control={<Radio />} label="B➕" />
-              <FormControlLabel value="B-" control={<Radio />} label="B➖" />
-            </RadioGroup>
-            <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
-              <FormControlLabel value="AB+" control={<Radio />} label="AB➕" />
-              <FormControlLabel value="AB-" control={<Radio />} label="AB➖" />
-            </RadioGroup>
-            <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
-              <FormControlLabel value="O+" control={<Radio />} label="O➕" />
-              <FormControlLabel value="O-" control={<Radio />} label="O➖" />
-            </RadioGroup>
-          </FormControl>
-          <br />
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={callBackend}
-          >Submit Donor Details</Button>
-        </Dialog>
-      </>
-    </MuiThemeProvider >
-  );
+  switch (step) {
+    case 1:
+      return (
+        <MuiThemeProvider theme={theme} >
+          <>
+            <Dialog
+              open
+              fullWidth
+              maxWidth='sm'
+            >
+              <AppBar title="Enter Donor Details" />
+              <TextField
+                placeholder="Enter Your Name"
+                label="Name"
+                onChange={event => setName(event.target.value)}
+                defaultValue={name}
+                margin="normal"
+                fullWidth
+              />
+              <TextField
+                placeholder="Enter Your Age"
+                label="Age"
+                onChange={event => setAge(event.target.value)}
+                defaultValue={age}
+                margin="normal"
+                fullWidth
+                inputProps={{ inputMode: 'numeric' }}
+              />
+              <br />
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Gender</FormLabel>
+                <RadioGroup row value={gender} onChange={event => setGender(event.target.value)}>
+                  <FormControlLabel value="male" control={<Radio />} label="Male" />
+                  <FormControlLabel value="female" control={<Radio />} label="Female" />
+                  <FormControlLabel value="other" control={<Radio />} label="Other" />
+                </RadioGroup>
+              </FormControl>
+              <TextField
+                placeholder="Enter Your Phone"
+                label="Phone"
+                onChange={event => setPhone(event.target.value)}
+                defaultValue={phone}
+                margin="normal"
+                fullWidth
+                inputProps={{ inputMode: 'numeric' }}
+              />
+              <TextField
+                placeholder="Enter Your Email"
+                label="Email"
+                onChange={event => setEmail(event.target.value)}
+                defaultValue={email}
+                margin="normal"
+                fullWidth
+              />
+              <br />
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Blood Group</FormLabel>
+                <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
+                  <FormControlLabel value="A+" control={<Radio />} label="A➕" />
+                  <FormControlLabel value="A-" control={<Radio />} label="A➖" />
+                </RadioGroup>
+                <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
+                  <FormControlLabel value="B+" control={<Radio />} label="B➕" />
+                  <FormControlLabel value="B-" control={<Radio />} label="B➖" />
+                </RadioGroup>
+                <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
+                  <FormControlLabel value="AB+" control={<Radio />} label="AB➕" />
+                  <FormControlLabel value="AB-" control={<Radio />} label="AB➖" />
+                </RadioGroup>
+                <RadioGroup row value={bloodGroup} onChange={event => setBloodGroup(event.target.value)}>
+                  <FormControlLabel value="O+" control={<Radio />} label="O➕" />
+                  <FormControlLabel value="O-" control={<Radio />} label="O➖" />
+                </RadioGroup>
+              </FormControl>
+              <br />
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={callBackend}
+              >Submit Donor Details</Button>
+            </Dialog>
+          </>
+        </MuiThemeProvider >
+      );
+    case 2:
+      return (
+        <h3>Thank you for becoming a Covid-19 Plasma Donation Hero!</h3>
+      );
+    default:
+      (console.log('This is a multi-step form built with React.'))
+  }
 }
 
 export default Donor

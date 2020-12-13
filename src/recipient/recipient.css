@@ -1,0 +1,7 @@
+
+.DonorsList {
+  text-align: left;
+  padding-left: ($spacer-x * .5) !important;
+  margin-left: 100 !important;
+  marginLeft: 100;
+}
